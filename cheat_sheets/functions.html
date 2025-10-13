@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Sakarias Nordberget. E-post<span id="emailcontainer"></span></p>
+    <script>
+
+        function myFirstFunction(){
+            console.log("Dette er min første funksjon")
+        }
+         myFirstFunction()
+
+         function printName(name){
+            console.log(`Mitt navn er ${name}`)
+         }
+
+         printName("Sakarias")
+
+         function printNameAndAge(name, age){
+            console.log(`Mitt navn er ${name}, og jeg er ${age} år gammel`)
+         }
+       
+         printNameAndAge("Sakarias", 20)
+
+         function printDefaultName(name = "Navn"){
+            console.log(name)
+         }
+
+         printDefaultName("Sakarias")
+
+         function createEmailLink(email){
+            if(!email){
+                return "Ikke oppgitt"
+            }
+            return `<a href="mailto:${email}">${email}</a>`
+         }
+
+         console.log(createEmailLink("sakariasnord@gmail.com"))
+        document.getElementById("emailcontainer").innerHTML =createEmailLink("sakariasnord@gmail.com")
+
+        function ageCalculator(birthyear, year){
+            const age = year - birthyear
+            const date = new Date().getFullYear()
+            console.log(age)
+            let text = ""
+            if(year > date){
+                text = `I ${year} vil du være ${age} år gammel`
+                console.log(text)
+            } else if(year < date){
+                if(age < 0){
+                    text=`I ${year} er det ${Math.abs(age)} år til du blir født i ${birthyear}`
+                } else{
+                    text=`I ${year} var du ${age} år gammel.`
+                }
+            }
+            console.log(text)
+        }
+
+        const users = [
+            {
+                name: "Jostein",
+                birthyear: 1977
+            },
+            {
+                name: "Amanada",
+                birthyear: 2001
+            }
+            
+        ]
+
+        ageCalculator(users[0].birthyear, users[1].birthyear) 
+
+        function randomMinMax(a, b){
+            return Math.floor(Math.random() * (b - a + 1) + a )
+        }
+        
+        console.log(randomMinMax (0, 100))
+
+        //verifisiering
+
+        const users = [
+            {
+                name: "Sakarias",
+                username: "SakNor",
+                email: "sakariasnord@gmail.com",
+                password: "OP"
+            },
+            {
+                name: "Pernille",
+                username: "Vaagan05",
+                email: "pernille.vaagan@icloud.com",
+                password: "Batt"
+            },
+            {
+                name: "Per",
+                username: "PerM",
+                email: "per.mandor@gmail.com",
+                password: "Fergie"
+            }
+        ]
+
+        function verifyUser(email, password){
+            const filteredUser = users.filter(user => user.email === email && user.password === password)
+            if (filteredUser[0]){
+                console.log("Logget inn som " + filteredUser[0].name)
+            } else {
+                alert("Feil passord eller e-post")
+            }
+        }
+
+        verifyUser("sakariasnord@gmail.com, "OP")
+
+
+    </script>
+</body>
+</html>

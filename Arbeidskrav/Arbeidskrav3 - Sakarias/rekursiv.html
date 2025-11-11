@@ -16,7 +16,7 @@
             Hva er en rekursiv funksjon?
 
             --Ditt svar her. Husk kilder--
-            En rekursiv funksjon er en funksjon som kaller på seg selv i funksjonens kode. 
+            En rekursiv funksjon er en funksjon som kaller på seg selv i funksjonens kode. Det vil si at funksjonen starter på nytt igjen av seg selv.
             En rekursiv funksjon må alltid ha en betingelse som får den til å avslutte av seg selv.
             Hvis ikke vil funksjonen foregå uendelig. Rekursive funksjoner blir brukt for å dele store problemer inn i mindre delproblemer.
 
@@ -25,20 +25,24 @@
         */
         
         
-    function numberSelector(liste){
+    function numberSelector(liste){ //numberSelector er den rekursive funksjonen.
         //Din kode her
-        const tall = Math.floor(Math.random() *9) + 1
-        liste.push(tall)
-        document.getElementById("numberList").innerHTML = liste
+        const tall = Math.floor(Math.random() * 9) + 1 // Generer et tilfeldig tall fra 1 til 9.
+        liste.push(tall) //Legger tallet i arrayet.
+        document.getElementById("numberList").innerHTML = liste //Skriver ut listen.
 
-        if (tall === 4 || tall === 7) {
+        if (tall === 4) {
+            return liste
+        } 
+        if (tall === 7){
             return liste
         } else {
             return numberSelector(liste)
-        }
+        } //Sier at den skal vise listen hvis tallene 4 eller 7 blir generert. Hvis ikke skal den trekke et nytt tall.
     }
 
-    numberSelector([])
+    
+    numberSelector([]) // Starter funksjonen på nytt
 
     
     </script>

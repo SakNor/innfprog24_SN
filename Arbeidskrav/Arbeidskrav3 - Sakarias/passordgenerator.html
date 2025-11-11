@@ -8,31 +8,34 @@
 <body>
     <h1>Passordgenerator</h1>
     <!-- Felter for brukervalg her -->
+
      <label>
-        Passord lengde: 
-        <input id="lengde" min="6" type="number" value="12" />
+        Inkluder små bokstaver
+        <input id="lowercase" type="checkbox" /> <!-- Avkrysning for små bokstaver -->
      </label>
 
      <label>
         Inkluder store bokstaver
-        <input id="uppercase" type="checkbox" checked />
+        <input id="uppercase" type="checkbox" /> <!-- Avkrysning for store bokstaver -->
      </label>
 
      <label>
-        Inkluder nummer
-        <input id="numbers" type="checkbox" checked />
+        Inkluder tall
+        <input id="numbers" type="checkbox" /> <!-- Avkrysning for tall-->
      </label>
 
      <label>
         Inkluder symboler
-        <input id="symbols" type="checkbox" checked />
+        <input id="symbols" type="checkbox" /> <!-- Avkrysning for symboler -->
      </label>
 
-     <button class="btn" onclick="generer()">Generer Passord</button>
-     <button class="btn" onclick="reset()">Reset</button>
+     <label>
+        Passord lengde: 
+        <input id="lengde" value="" /> <!-- Input felt for å velge lengde på passord-->
+     </label>
+
+     <button class="btn" onclick="generer()">Generer passord</button> <!-- Knapp for å generere passord-->
      
-
-
      <p>Ditt passord: <span id="generatedPassword"></span></p>
 
      <script>
@@ -43,40 +46,33 @@
 
         function passwordGenerator(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {
             /* Din kode her */
-            if (includeLowercase) chars += lowercase
-            if (includeUppercase) chars += uppercase
-            if (includeNumbers) chars += numbers
-            if (includeSymbols) chars += symbols
+            let karakterer = ""
+            if (includeLowercase) karakterer += lowercase //If-tester for hva som skjer hvis checkboxen blir krysset av 
+            if (includeUppercase) karakterer += uppercase
+            if (includeNumbers) karakterer += numbers
+            if (includeSymbols) karakterer += symbols
+            
 
-            let pass ="";
+            let passord="" // Genererer tilfeldige tall og legger det inn sammen med andre bokstaver eller symboler ut ifra lengde på passord og avkryssede bokser
             for (let i = 0; i < length; i++){
-                const randomIndex = Math.floor(Math.random() * chars.length)
-                pass += chars[randomIndex] 
+                const randomIndex = Math.floor(Math.random() * karakterer.length)
+                passord += karakterer[randomIndex] 
             }
 
-            return pass;
+            return passord; //Gjør det mulig å skrive ut passordet
         
         }
-            function generer(){
-                const length = parseInt(document.getElementById("length").value)
+            function generer(){ 
+                const length = document.getElementById("lengde").value
                 const uppercase = document.getElementById("uppercase").checked
+                const lowercase = document.getElementById("lowercase").checked
                 const numbers = document.getElementById("numbers").checked
                 const symbols = document.getElementById("symbols").checked
 
-                const pass = passwordGenerator(length, uppercase, numbers, symbols)
-                document.getElementById("generatedPassword")
-            }
+                const passord = passwordGenerator(length, lowercase, uppercase, numbers, symbols)
+                document.getElementById("generatedPassword").textContent = passord
+            } //Funksjonen som skriver ut passordet i nettleseren dersom brukeren trykker på Generer passord
             
-            function reset(){
-                document.getElementById("length").value = 12;
-                document.getElementById("uppercase").checked = true
-                document.getElementById("numbers").checked = true
-                document.getElementById("symbols").checked = true
-                document.getElementById("generatedPassword")
-            }
-
-            
-
      </script>
 </body>
 </html>

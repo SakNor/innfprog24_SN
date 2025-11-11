@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passordgenerator</title>
+</head>
+<body>
+    <h1>Passordgenerator</h1>
+    <!-- Felter for brukervalg her -->
+     <label>
+        Passord lengde: 
+        <input id="lengde" min="6" type="number" value="12" />
+     </label>
+
+     <label>
+        Inkluder store bokstaver
+        <input id="uppercase" type="checkbox" checked />
+     </label>
+
+     <label>
+        Inkluder nummer
+        <input id="numbers" type="checkbox" checked />
+     </label>
+
+     <label>
+        Inkluder symboler
+        <input id="symbols" type="checkbox" checked />
+     </label>
+
+     <button class="btn" onclick="generer()">Generer Passord</button>
+     <button class="btn" onclick="reset()">Reset</button>
+     
+
+
+     <p>Ditt passord: <span id="generatedPassword"></span></p>
+
+     <script>
+        const lowercase = "abcdefghijklmnopqrstuvwxyz";
+        const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const numbers = "0123456789";
+        const symbols = "!@#$%^&*()_+-=[]{}|;:',.<>?/`~";
+
+        function passwordGenerator(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {
+            /* Din kode her */
+            if (includeLowercase) chars += lowercase
+            if (includeUppercase) chars += uppercase
+            if (includeNumbers) chars += numbers
+            if (includeSymbols) chars += symbols
+
+            let pass ="";
+            for (let i = 0; i < length; i++){
+                const randomIndex = Math.floor(Math.random() * chars.length)
+                pass += chars[randomIndex] 
+            }
+
+            return pass;
+        
+        }
+            function generer(){
+                const length = parseInt(document.getElementById("length").value)
+                const uppercase = document.getElementById("uppercase").checked
+                const numbers = document.getElementById("numbers").checked
+                const symbols = document.getElementById("symbols").checked
+
+                const pass = passwordGenerator(length, uppercase, numbers, symbols)
+                document.getElementById("generatedPassword")
+            }
+            
+            function reset(){
+                document.getElementById("length").value = 12;
+                document.getElementById("uppercase").checked = true
+                document.getElementById("numbers").checked = true
+                document.getElementById("symbols").checked = true
+                document.getElementById("generatedPassword")
+            }
+
+            
+
+     </script>
+</body>
+</html>
